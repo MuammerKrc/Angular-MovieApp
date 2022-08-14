@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieModel } from '../models/movie-model';
 import { MovieRepository } from '../models/movie-repository';
+import { AlertifyService } from '../services/alertify-service';
 
 @Component({
   selector: 'app-movies',
@@ -15,7 +16,7 @@ export class MoviesComponent implements OnInit {
   populerMovies: MovieModel[];
   event: any;
   movieRepository: MovieRepository;
-  constructor() {
+  constructor(private alertify:AlertifyService) {
     this.movieRepository = new MovieRepository();
     this.movies = this.movieRepository.getMovies();
     this.populerMovies = this.movieRepository.getPopularMovie();
@@ -27,17 +28,19 @@ export class MoviesComponent implements OnInit {
   searchChanged() {
     this.filteredMovie = this.filterText ? this.movies.filter(i => i.description.indexOf(this.filterText) !== -1 || i.title.indexOf(this.filterText) !== -1) : this.movies;
   }
-  addListEvent(event: any, id: Number) {
+  addListEvent(event: any, item: MovieModel) {
     this.event = event;
     console.log(event.target);
     if (event.target.classList.contains('btn-outline-primary')) {
       event.target.classList.remove("btn-outline-primary");
       event.target.classList.add("btn-outline-warning");
       event.target.innerHTML = "Listeden Çıkar";
+      this.alertify.success(item.title +" listeye eklendi");
     } else {
       event.target.classList.add("btn-outline-primary");
       event.target.classList.remove("btn-outline-warning");
       event.target.innerHTML = "Listeye Ekle";
+      this.alertify.error(item.title +" listeden çıkarıldı");
     }
   }
 }

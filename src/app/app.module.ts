@@ -11,6 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { CategoryComponent } from './category/category.component';
 import { DescriptionPipePipe } from './description-pipe.pipe';
 import { FormsModule } from '@angular/forms';
+import { AlertifyService } from './services/alertify-service';
 
 @NgModule({
   declarations: [ //component
@@ -28,7 +29,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],//service
+  providers: [AlertifyService],//service
   bootstrap: [AppComponent]//startet component
 })
 export class AppModule { }
