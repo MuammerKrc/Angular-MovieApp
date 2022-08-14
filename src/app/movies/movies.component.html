@@ -1,0 +1,52 @@
+<div *ngIf="movies.length>0; else no_movies">
+  <h1>Bulunan Filmler</h1>
+  <div class="alert alert-warning p-1">{{movies.length}} film bulundu</div>
+  <div class="row">
+    <div class="mb-3">
+      <input type="search" class="form-control" [(ngModel)]="filterText" (ngModelChange)="searchChanged()"
+        placeholder="Search">
+      <small class="text-muted" *ngIf="filterText">Aradığınız Kelime: {{filterText}}</small>
+    </div>
+  </div>
+
+  <ng-template [ngTemplateOutlet]="popularMovie" [ngTemplateOutletContext]="{moviess:populerMovies}"></ng-template>
+  <ng-template [ngTemplateOutlet]="movieCard" [ngTemplateOutletContext]="{moviess:filteredMovie}"></ng-template>
+</div>
+
+<ng-template #movieCard let-movieModel="moviess">
+  <div class="card mb-3" *ngFor="let item of movieModel">
+    <div class="row">
+      <div class="col-md-3">
+        <img src="/assets/img/{{item.imageUrl}}" alt="" class="img-fluid rounded-start">
+      </div>
+      <div class="col-md-9 ">
+        <div class="card-body">
+          <h2 class="card-title">{{item.title }}</h2>
+          <p class="card-text">{{item.description | descriptionPipe:50}}
+          <p>
+            <button class="btn btn-sm btn-outline-primary">Details</button>
+            <button (click)="addListEvent($event,item.id)" class="btn btn-sm btn-outline-primary active"
+              style="margin-left:5px ;">Listeye Ekle</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #popularMovie let-movieModel="moviess">
+  <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
+    <div class="col" *ngFor="let item of movieModel">
+      <div class="card h-100">
+        <img src="/assets/img/{{item.imageUrl}}" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">{{item.title}}</h5>
+          <p class="card-text">{{item.description | descriptionPipe:20}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #no_movies>
+  <div class="alert alert-warning ">Film Bulunamadı</div>
+</ng-template>
