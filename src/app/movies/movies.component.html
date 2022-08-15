@@ -1,3 +1,8 @@
+
+<div *ngIf="gettingError">
+  <div class="alert alert-danger p-1">{{errorResponse}}</div>
+
+</div>
 <div *ngIf="movies.length>0; else no_movies">
   <h1>Bulunan Filmler</h1>
   <div class="alert alert-warning p-1">{{movies.length}} film bulundu</div>

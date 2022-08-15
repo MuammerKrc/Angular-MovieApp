@@ -1,38 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { ignoreElements } from 'rxjs';
 import { CateogryModel } from '../models/category-model';
-import { CategoryRepository } from '../models/category-repository';
+import { CategoryService } from '../services/category-service';
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+  styleUrls: ['./category.component.css'],
+  providers:[CategoryService]
 })
 export class CategoryComponent implements OnInit {
   categories: CateogryModel[];
-  categoriRepository: CategoryRepository;
   selectedCategory: CateogryModel = null;
   displayAll: boolean = true;
 
-  constructor() {
-    this.categoriRepository = new CategoryRepository();
-    this.categories = this.categoriRepository.getCategories();
+  constructor(private categoryService:CategoryService) {
   }
 
   ngOnInit(): void {
+    var $categoryobser=this.categoryService.getCategories();
+    $categoryobser.subscribe(i=>{
+      this.categories=i;
+    })
   }
   clickLinkEvent(item?: CateogryModel) {
-    console.log("girdi");
     if (item) {
       this.selectedCategory = item;
       this.displayAll = false;
-      console.log("boş");
-
     }
     else {
       this.displayAll = true;
-      console.log("dolu");
-
     }
   }
 }

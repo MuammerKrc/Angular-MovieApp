@@ -12,7 +12,7 @@ import { CategoryComponent } from './category/category.component';
 import { DescriptionPipePipe } from './description-pipe.pipe';
 import { FormsModule } from '@angular/forms';
 import { AlertifyService } from './services/alertify-service';
-
+import{HttpClientModule} from '@angular/common/http';
 @NgModule({
   declarations: [ //component
     AppComponent,
@@ -27,7 +27,8 @@ import { AlertifyService } from './services/alertify-service';
   imports: [ //module
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [AlertifyService],//service
   bootstrap: [AppComponent]//startet component
