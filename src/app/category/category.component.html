@@ -1,5 +1,6 @@
 <div class="list-group">
-  <a href="#" (click)="clickLinkEvent()" [class.active]="displayAll" class="list-group-item list-group-item-action">Tüm Kategoriler</a>
-  <a href="#" [class.active]="!displayAll && selectedCategory.id==item.id" class="list-group-item list-group-item-action" (click)="clickLinkEvent(item)"
+  <a routerLink="movies" (click)="clickLinkEvent()" [class.active]="displayAll" class="list-group-item list-group-item-action">Tüm Kategoriler</a>
+
+  <a routerLink="movies/category/{{item.id}}" [class.active]="!displayAll && selectedCategory.id==item.id" class="list-group-item list-group-item-action" (click)="clickLinkEvent(item)"
     *ngFor="let item of categories">{{item.name}}</a>
 </div>

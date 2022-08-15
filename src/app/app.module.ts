@@ -13,6 +13,7 @@ import { DescriptionPipePipe } from './description-pipe.pipe';
 import { FormsModule } from '@angular/forms';
 import { AlertifyService } from './services/alertify-service';
 import{HttpClientModule} from '@angular/common/http';
+import { MovieCreateComponent } from './movie-create/movie-create.component';
 @NgModule({
   declarations: [ //component
     AppComponent,
@@ -22,7 +23,8 @@ import{HttpClientModule} from '@angular/common/http';
     MovieDetailComponent,
     FooterComponent,
     CategoryComponent,
-    DescriptionPipePipe
+    DescriptionPipePipe,
+    MovieCreateComponent
   ],
   imports: [ //module
     BrowserModule,

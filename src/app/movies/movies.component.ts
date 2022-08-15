@@ -1,5 +1,7 @@
+import { JsonPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MovieModel } from '../models/movie-model';
 import { AlertifyService } from '../services/alertify-service';
 import { MovieService } from '../services/movie-service';
@@ -19,21 +21,27 @@ export class MoviesComponent implements OnInit {
   filteredMovie: MovieModel[];
   populerMovies: MovieModel[];
   event: any;
-  constructor(private alertify: AlertifyService, private movieService: MovieService) {
+  constructor(private alertify: AlertifyService, private movieService: MovieService, private activeRouter: ActivatedRoute) {
     // this.populerMovies = this.movieRepository.getPopularMovie();
 
   }
 
   ngOnInit(): void {
     this.gettingError = false;
-    var $movieobser = this.movieService;
-    $movieobser.getMovies().subscribe(i => {
-      this.movies = i;
-      this.filteredMovie = i;
-      this.populerMovies = i.filter(i => i.isPopular);
-    }, (i) => {
-      this.errorResponse = i;
-      this.gettingError = true;
+
+    this.activeRouter.params.subscribe(i => {
+      var $movieobser = this.movieService;
+      $movieobser.getMovies(i["id"]).subscribe(i => {
+        this.movies = i;
+        this.filteredMovie = i;
+        this.populerMovies = i.filter(i => i.isPopular);
+        if (this.populerMovies && this.populerMovies.length > 3) {
+          this.populerMovies = this.populerMovies.slice(3);
+        }
+      }, (i) => {
+        this.errorResponse = i;
+        this.gettingError = true;
+      });
     });
   }
 

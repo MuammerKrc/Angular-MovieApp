@@ -1,8 +1,7 @@
-
 <div *ngIf="gettingError">
   <div class="alert alert-danger p-1">{{errorResponse}}</div>
-
 </div>
+
 <div *ngIf="movies.length>0; else no_movies">
   <h1>Bulunan Filmler</h1>
   <div class="alert alert-warning p-1">{{movies.length}} film bulundu</div>
@@ -29,7 +28,7 @@
           <h2 class="card-title">{{item.title }}</h2>
           <p class="card-text">{{item.description | descriptionPipe:50}}
           <p>
-            <button class="btn btn-sm btn-outline-primary">Details</button>
+            <a routerLink="/movies/{{item.id}}" class="btn btn-sm btn-outline-primary">Details</a>
             <button (click)="addListEvent($event,item)" class="btn btn-sm btn-outline-primary active"
               style="margin-left:5px ;">Listeye Ekle</button>
         </div>
