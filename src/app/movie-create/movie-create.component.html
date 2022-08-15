@@ -1,21 +1,21 @@
 <form>
   <div class="mb-3">
     <label for="title" class="form-label">Title</label>
-    <input type="text" class="form-control">
+    <input #titleInput type="text" class="form-control">
   </div>
   <div class="mb-3">
     <label for="description" class="form-label">Description</label>
-    <textarea class="form-control"></textarea>
+    <textarea #descInput class="form-control"></textarea>
   </div>
   <div class="mb-3">
     <label for="imgUrl" class="form-label">ImageUrl</label>
-    <input type="text" class="form-control">
+    <input #imgInput type="text" class="form-control">
   </div>
   <div class="mb-3">
     <label for="categoryId" class="form-label">Category</label>
-    <select class="form-select">
+    <select #categoryInput class="form-select">
       <option *ngFor="let item of categories" [value]="item.id">{{item.name}}</option>
     </select>
   </div>
-  <button></button>
+  <button class="btn btn-primary" (click)="createMovie(titleInput,descInput,imgInput,categoryInput)">Kaydet</button>
 </form>
