@@ -1,11 +1,14 @@
-<form [formGroup]="loginForm" class="form-group">
+<form *ngIf="!isLoading" [formGroup]="loginForm" class="form-group">
   <div class="mb-3 col-12 col-sm-6 col-md-5">
     <label for="email" class="form-label">Email</label>
-    <input (change)="write()" class="form-control " type="text" name="email" formControlName="email" >
-    <div *ngIf="loginForm.get('email').invalid&&loginForm.get('email').errors['required']&&loginForm.get('email').touched" class="alert alert-danger">
+    <input (change)="write()" class="form-control " type="text" name="email" formControlName="email">
+    <div
+      *ngIf="loginForm.get('email').invalid&&loginForm.get('email').errors['required']&&loginForm.get('email').touched"
+      class="alert alert-danger">
       Bu alan gereklidir.
     </div>
-    <div *ngIf="loginForm.get('email').invalid&&loginForm.get('email').errors['email']&&loginForm.get('email').touched" class="alert alert-danger">
+    <div *ngIf="loginForm.get('email').invalid&&loginForm.get('email').errors['email']&&loginForm.get('email').touched"
+      class="alert alert-danger">
       Bu alana email giriniz.
     </div>
   </div>
@@ -13,7 +16,12 @@
     <label for="Password" class="form-label">Password</label>
     <input class="form-control " type="password" formControlName="password" name="Password" id="Password">
   </div>
-  <button [disabled]="loginForm.invalid" (click)="loginUser()" class="btn btn-outline-primary">{{isLoginModel?'Login':'Register'}}</button>
+  <button [disabled]="loginForm.invalid" (click)="loginUser()"
+    class="btn btn-outline-primary">{{isLoginModel?'Login':'Register'}}</button>
   <button (click)="toggle()" style="margin-left: 20px;" class="btn btn-secondary">Toggle to
     {{isLoginModel?'Register':'Login'}}</button>
 </form>
+
+<div *ngIf="isLoading" class="spinner-border" role="status">
+  <span class="sr-only">Loading...</span>
+</div>

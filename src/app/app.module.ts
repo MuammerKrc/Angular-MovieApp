@@ -17,6 +17,7 @@ import { MovieCreateComponent } from './movie-create/movie-create.component';
 import { TemplateFormComponent } from './template-form/template-form.component';
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { AuthComponent } from './auth/auth.component';
+import { AuthService } from './services/auth-service';
 @NgModule({
   declarations: [ //component
     AppComponent,
@@ -39,7 +40,7 @@ import { AuthComponent } from './auth/auth.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [AlertifyService],//service
+  providers: [AlertifyService,AuthService],//service
   bootstrap: [AppComponent]//startet component
 })
 export class AppModule { }
