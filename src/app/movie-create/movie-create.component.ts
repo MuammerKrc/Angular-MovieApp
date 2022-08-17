@@ -23,11 +23,12 @@ export class MovieCreateComponent implements OnInit {
   createMovie(title: any, desc: any, img: any, category: any) {
     console.log(title.value, desc.value, img.value, category.value);
     var newMovie: MovieModel = {
-      id: 0,
+      id: "",
       description: desc.value,
       imageUrl: img.value,
       isPopular: false,
-      title: title.value
+      title: title.value,
+      categoryId:"",
     };
     this.movieService.createMOvie(newMovie).subscribe(i=>{
       this.router.navigate(["/movies"])

@@ -11,11 +11,13 @@ import { MovieService } from '../services/movie-service';
 })
 export class MovieDetailComponent implements OnInit {
   movie: MovieModel = {
-    id: 0,
+    id: "",
     title: "",
     description: "",
     imageUrl: "",
-    isPopular: false
+    isPopular: false,
+    categoryId:""
+
   }
   constructor(private movieService: MovieService, private activatedRouter: ActivatedRoute) {
 
@@ -31,5 +33,5 @@ export class MovieDetailComponent implements OnInit {
     })
   }
 
-  
+
 }

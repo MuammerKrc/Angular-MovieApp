@@ -18,7 +18,7 @@ export class ReactiveFormComponent implements OnInit {
   movieForm: FormGroup = new FormGroup({
     title: new FormControl(null, [Validators.required, Validators.minLength(5)]),
     description: new FormControl(null, [Validators.required]),
-    imageUrl: new FormControl("", [Validators.required,ImageValidator.isValidExtension]),
+    imageUrl: new FormControl("", [Validators.required, ImageValidator.isValidExtension]),
     categoryId: new FormControl(null, [Validators.required])
   });
   constructor(private categoryService: CategoryService, private movieService: MovieService, private router: Router) { }
@@ -29,11 +29,13 @@ export class ReactiveFormComponent implements OnInit {
   }
 
   createMovie() {
-    var newMovie = (this.movieForm.value);
+    var newMovie: MovieModel = this.movieForm.value;
+    newMovie.id = "";
+    newMovie.isPopular = false;
     console.log(this.movieForm);
-    // this.movieService.createMOvie(newMovie).subscribe(i => {
-    //   this.router.navigateByUrl('/movies');
-    // });
+    this.movieService.createMOvie(newMovie).subscribe(i => {
+      console.log(i);
+    });
   }
   clear() {
     this.movieForm.patchValue({

@@ -1,7 +1,8 @@
 export interface MovieModel{
-  id:number;
+  id:string;
   title:string;
   description:string;
+  categoryId:string;
   imageUrl:string;
   isPopular:boolean;
 }
