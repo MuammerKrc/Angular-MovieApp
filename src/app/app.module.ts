@@ -16,6 +16,7 @@ import{HttpClientModule} from '@angular/common/http';
 import { MovieCreateComponent } from './movie-create/movie-create.component';
 import { TemplateFormComponent } from './template-form/template-form.component';
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
+import { AuthComponent } from './auth/auth.component';
 @NgModule({
   declarations: [ //component
     AppComponent,
@@ -28,7 +29,8 @@ import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
     DescriptionPipePipe,
     MovieCreateComponent,
     TemplateFormComponent,
-    ReactiveFormComponent
+    ReactiveFormComponent,
+    AuthComponent
   ],
   imports: [ //module
     BrowserModule,
