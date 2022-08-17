@@ -82,17 +82,17 @@
     },
     {
       "id": 11,
-      "description": "asd",
-      "imageUrl": "asd",
-      "isPopular": false,
-      "title": "asd"
-    },
-    {
-      "id": 12,
-      "description": "ss",
+      "description": "DEneme",
       "imageUrl": "1.jpeg",
       "isPopular": false,
-      "title": "ss"
+      "title": "Deneme "
+    },
+    {
+      "title": "Selam",
+      "description": "Selam dedik gülüm",
+      "imgUrl": "3.jpeg",
+      "categoryId": "2",
+      "id": 12
     }
   ],
   "categories": [

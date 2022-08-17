@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { AlertifyService } from './services/alertify-service';
 import{HttpClientModule} from '@angular/common/http';
 import { MovieCreateComponent } from './movie-create/movie-create.component';
+import { TemplateFormComponent } from './template-form/template-form.component';
 @NgModule({
   declarations: [ //component
     AppComponent,
@@ -24,7 +25,8 @@ import { MovieCreateComponent } from './movie-create/movie-create.component';
     FooterComponent,
     CategoryComponent,
     DescriptionPipePipe,
-    MovieCreateComponent
+    MovieCreateComponent,
+    TemplateFormComponent
   ],
   imports: [ //module
     BrowserModule,
