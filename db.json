@@ -42,7 +42,7 @@
     },
     {
       "id": 6,
-      "title": "film 1",
+      "title": "film 6",
       "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati, quam incidun",
       "imageUrl": "1.jpeg",
       "isPopular": false,
@@ -50,7 +50,7 @@
     },
     {
       "id": 7,
-      "title": "film 2",
+      "title": "film 7",
       "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati, quam incidun",
       "imageUrl": "2.jpeg",
       "isPopular": true,
@@ -58,7 +58,7 @@
     },
     {
       "id": 8,
-      "title": "film 3",
+      "title": "film 8",
       "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati, quam incidun",
       "imageUrl": "3.jpeg",
       "isPopular": true,
@@ -66,7 +66,7 @@
     },
     {
       "id": 9,
-      "title": "film 4",
+      "title": "film 9",
       "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati, quam incidun",
       "imageUrl": "4.jpeg",
       "isPopular": true,
@@ -74,23 +74,16 @@
     },
     {
       "id": 10,
-      "title": "film 5",
+      "title": "film 10",
       "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati, quam incidun",
       "imageUrl": "5.jpeg",
       "isPopular": false,
       "categoryId": 1
     },
     {
-      "id": 11,
-      "description": "DEneme",
-      "imageUrl": "1.jpeg",
-      "isPopular": false,
-      "title": "Deneme "
-    },
-    {
-      "title": "Selam",
-      "description": "Selam dedik gülüm",
-      "imgUrl": "3.jpeg",
+      "title": "Reactive Form Film ",
+      "description": "Reacti Form Film Description",
+      "imageUrl": "3.jpeg",
       "categoryId": "2",
       "id": 12
     }

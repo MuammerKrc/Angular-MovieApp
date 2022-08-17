@@ -1,0 +1,30 @@
+<form [formGroup]="movieForm">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" class="form-control" formControlName="title">
+    <div class="alert alert-danger" *ngIf="movieForm.get('title').invalid&&movieForm.get('title').touched">
+      <p *ngIf="movieForm.get('title').errors['required']">Ama bu alan gerekli</p>
+      <p *ngIf="movieForm.get('title').errors['minlength']">En az 5 karakter uzunluğunda olmalı</p>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea class="form-control" formControlName="description"></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="imageUrl" class="form-label">ImageUrl</label>
+    <input type="text" class="form-control" formControlName="imageUrl">
+    <div class="alert alert-warning" *ngIf="movieForm.get('imageUrl').invalid&&movieForm.get('imageUrl').touched">
+      <p *ngIf="movieForm.get('imageUrl').errors['required']">Bu alan Gereklidir</p>
+      <p *ngIf="movieForm.get('imageUrl').errors['imgExtension']">Img Formatında olması gerekmektedir</p>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="categoryId" class="form-label">Category</label>
+    <select class="form-select" formControlName="categoryId">
+      <option *ngFor="let item of categories" [value]="item.id">{{item.name}}</option>
+    </select>
+  </div>
+  <button [disabled]="!movieForm.valid" class="btn btn-primary" (click)="createMovie()">Kaydet</button>
+  <button class=" btn btn-warning" (click)="clear()" style="margin-left: 20px;">Clear</button>
+</form>
