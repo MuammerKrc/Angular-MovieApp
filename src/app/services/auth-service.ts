@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { catchError, Observable, throwError } from "rxjs";
 import { AuthResponse } from "../models/auth-model";
 
 
@@ -20,13 +20,35 @@ export class AuthService {
       email: email,
       password: password,
       returnSecureToken: true
-    });
+    }).pipe(
+      catchError(this.handleError));
+
   }
   login(email: string, password: string): Observable<AuthResponse> {
     return this.http.post<AuthResponse>("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + this.api_key, {
       email: email,
       password: password,
       returnSecureToken: true
-    });
+    }).pipe(catchError(this.handleError));
+  }
+
+  private  handleError(err: HttpErrorResponse) {
+    let message = "hata oluştu.";
+    if(navigator.onLine)
+      return throwError("İnternet bağlantısı bulunamadı");
+    if (err.error.error) {
+      switch (err.error.error.message) {
+        case "EMAIL_EXISTS":
+          message = "Bu mail adresine bağlı hesap bulunmaktadır.";
+          break;
+        case "EMAIL_NOT_FOUND":
+          message = "Mail adresi bulunamadı";
+          break;
+        case "INVALID_PASSWORD":
+          message = "hatalı password";
+          break;
+      }
+    }
+    return throwError(message);
   }
 }

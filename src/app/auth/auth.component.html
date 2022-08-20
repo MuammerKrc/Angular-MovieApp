@@ -1,5 +1,9 @@
 <form *ngIf="!isLoading" [formGroup]="loginForm" class="form-group">
+
   <div class="mb-3 col-12 col-sm-6 col-md-5">
+    <div class="alert alert-danger" *ngIf="isGettingError&&errorMsg!=''">
+      {{errorMsg}}
+    </div>
     <label for="email" class="form-label">Email</label>
     <input (change)="write()" class="form-control " type="text" name="email" formControlName="email">
     <div
@@ -23,5 +27,5 @@
 </form>
 
 <div *ngIf="isLoading" class="spinner-border" role="status">
-  <span class="sr-only">Loading...</span>
+  <span class="sr-only"></span>
 </div>

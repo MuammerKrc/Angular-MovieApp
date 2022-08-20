@@ -12,6 +12,8 @@ import { AuthService } from '../services/auth-service';
 export class AuthComponent implements OnInit {
   isLoading: boolean = false;
   isLoginModel: boolean = true;
+  isGettingError:boolean=false;
+  errorMsg:string="";
   loginForm: FormGroup = new FormGroup({
     email: new FormControl("", [Validators.required, Validators.email]),
     password: new FormControl("", [Validators.required])
@@ -24,6 +26,7 @@ export class AuthComponent implements OnInit {
   }
   loginUser() {
     this.isLoading = true;
+    this.isGettingError=false;
     let authsResponse: Observable<AuthResponse>;
     var email = this.loginForm.get('email').value;
     var password = this.loginForm.get('password').value;
@@ -34,10 +37,12 @@ export class AuthComponent implements OnInit {
     }
     authsResponse.subscribe(data => {
       this.isLoading = false;
+      this.isGettingError=false;
       console.log(data);
     }, err => {
-      console.log(err);
       this.isLoading = false;
+      this.isGettingError=true;
+      this.errorMsg=err;
     });
   }
   toggle() {
