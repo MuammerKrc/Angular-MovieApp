@@ -28,10 +28,7 @@ export class MovieService {
         }
         return newMovies;
       }),
-      tap(data => console.log("fetch data", data)),
-      catchError(i => {
-        throw ("Bir hata meydana geldi");
-      })
+      tap(data => console.log("fetch data", data))
     );
   }
 
@@ -50,10 +47,8 @@ export class MovieService {
         }
         return movieModelList;
       }),
-      tap(i => console.log("movie girdi", i)),
-      catchError(i => {
-        throw new Error("Bir Hata meydana geldi");
-      }));
+      tap(i => console.log("movie girdi", i)));
+
   }
 
   createMOvie(model: MovieModel): Observable<MovieModel> {
@@ -63,10 +58,7 @@ export class MovieService {
       }),
     };
     return this.http.post<MovieModel>(this.firebaseUrl + "/movies.json", model, httpOptions).pipe(
-      tap(data => console.log("post movie ", model)),
-      catchError(i => {
-        throw new Error("Movie post error");
-      })
-    )
+      tap(data => console.log("post movie ", model))
+    );
   }
 }

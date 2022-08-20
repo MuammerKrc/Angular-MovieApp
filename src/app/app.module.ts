@@ -12,12 +12,13 @@ import { CategoryComponent } from './category/category.component';
 import { DescriptionPipePipe } from './description-pipe.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertifyService } from './services/alertify-service';
-import{HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MovieCreateComponent } from './movie-create/movie-create.component';
 import { TemplateFormComponent } from './template-form/template-form.component';
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { AuthComponent } from './auth/auth.component';
 import { AuthService } from './services/auth-service';
+import { ErrorInterceptorInterceptor } from './error-interceptor.interceptor';
 @NgModule({
   declarations: [ //component
     AppComponent,
@@ -40,7 +41,7 @@ import { AuthService } from './services/auth-service';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [AlertifyService,AuthService],//service
+  providers: [AlertifyService, AuthService, { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorInterceptor, multi: true }],//service
   bootstrap: [AppComponent]//startet component
 })
 export class AppModule { }

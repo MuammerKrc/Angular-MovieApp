@@ -40,9 +40,11 @@ export class AuthComponent implements OnInit {
       this.isGettingError=false;
       console.log(data);
     }, err => {
+      debugger;
       this.isLoading = false;
       this.isGettingError=true;
       this.errorMsg=err;
+      console.log(err);
     });
   }
   toggle() {
