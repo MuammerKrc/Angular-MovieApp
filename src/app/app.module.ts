@@ -21,6 +21,7 @@ import { AuthService } from './services/auth-service';
 import { ErrorInterceptorInterceptor } from './error-interceptor.interceptor';
 import { AuthInterceptor } from './auth.interceptor';
 import { AuthGuard } from './guards/auth.guard';
+import { MoviesHomeComponent } from './movies/movies-home/movies-home.component';
 @NgModule({
   declarations: [ //component
     AppComponent,
@@ -34,7 +35,8 @@ import { AuthGuard } from './guards/auth.guard';
     MovieCreateComponent,
     TemplateFormComponent,
     ReactiveFormComponent,
-    AuthComponent
+    AuthComponent,
+    MoviesHomeComponent
   ],
   imports: [ //module
     BrowserModule,
