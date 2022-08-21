@@ -2,9 +2,7 @@
 align-items: center;">
   <form *ngIf="!isLoading" [formGroup]="loginForm" class="form-group">
     <div class="mb-3  col-12 col-sm-6 col-md-5" style="width: 100%;">
-      <div class="alert alert-danger" *ngIf="isGettingError&&errorMsg!=''">
-        {{errorMsg}}
-      </div>
+      <app-alert *ngIf="isGettingError&&errorMsg!=''" [message]="errorMsg" (closer)="resetError($event)"></app-alert>
       <label for="email" class="form-label">Email</label>
       <input (change)="write()" class="form-control " type="text" name="email" formControlName="email">
       <div

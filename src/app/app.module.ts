@@ -22,6 +22,8 @@ import { ErrorInterceptorInterceptor } from './error-interceptor.interceptor';
 import { AuthInterceptor } from './auth.interceptor';
 import { AuthGuard } from './guards/auth.guard';
 import { MoviesHomeComponent } from './movies/movies-home/movies-home.component';
+import { AlertComponent } from './shared/alert/alert.component';
+import { LoadingComponent } from './shared/loading/loading.component';
 @NgModule({
   declarations: [ //component
     AppComponent,
@@ -36,7 +38,9 @@ import { MoviesHomeComponent } from './movies/movies-home/movies-home.component'
     TemplateFormComponent,
     ReactiveFormComponent,
     AuthComponent,
-    MoviesHomeComponent
+    MoviesHomeComponent,
+    AlertComponent,
+    LoadingComponent
   ],
   imports: [ //module
     BrowserModule,

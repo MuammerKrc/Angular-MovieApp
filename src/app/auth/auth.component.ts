@@ -13,21 +13,21 @@ import { AuthService } from '../services/auth-service';
 export class AuthComponent implements OnInit {
   isLoading: boolean = false;
   isLoginModel: boolean = true;
-  isGettingError:boolean=false;
-  errorMsg:string="";
+  isGettingError: boolean = false;
+  errorMsg: string = "";
   loginForm: FormGroup = new FormGroup({
     email: new FormControl("", [Validators.required, Validators.email]),
     password: new FormControl("", [Validators.required])
   });
 
-  constructor(private authService: AuthService,private router:Router) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
 
   ngOnInit(): void {
   }
   loginUser() {
     this.isLoading = true;
-    this.isGettingError=false;
+    this.isGettingError = false;
     let authsResponse: Observable<AuthResponse>;
     var email = this.loginForm.get('email').value;
     var password = this.loginForm.get('password').value;
@@ -42,8 +42,8 @@ export class AuthComponent implements OnInit {
     }, err => {
 
       this.isLoading = false;
-      this.isGettingError=true;
-      this.errorMsg=err;
+      this.isGettingError = true;
+      this.errorMsg = err;
     });
   }
   toggle() {
@@ -51,5 +51,9 @@ export class AuthComponent implements OnInit {
   }
   write() {
     console.log(this.loginForm);
+  }
+  resetError($event:any) {
+    console.log($event);
+    this.isGettingError = false;
   }
 }
