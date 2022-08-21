@@ -1,21 +1,38 @@
-<div *ngIf="gettingError">
-  <div class="alert alert-danger p-1">{{errorResponse}}</div>
-</div>
-
-<div *ngIf="movies.length>0; else no_movies">
-  <h1>Bulunan Filmler</h1>
-  <div class="alert alert-warning p-1">{{movies.length}} film bulundu</div>
+<div class="container my-3">
   <div class="row">
-    <div class="mb-3">
-      <input type="search" class="form-control" [(ngModel)]="filterText" (ngModelChange)="searchChanged()"
-        placeholder="Search">
-      <small class="text-muted" *ngIf="filterText">Aradığınız Kelime: {{filterText}}</small>
+    <div class="col-md-3">
+      <app-category></app-category>
+    </div>
+    <div class="col-md-9">
+
+      <div *ngIf="gettingError">
+        <div class="alert alert-danger p-1">{{errorResponse}}</div>
+      </div>
+
+      <div *ngIf="movies.length>0; else no_movies">
+        <h1>Bulunan Filmler</h1>
+        <div class="alert alert-warning p-1">{{movies.length}} film bulundu</div>
+        <div class="row">
+          <div class="mb-3">
+            <input type="search" class="form-control" [(ngModel)]="filterText" (ngModelChange)="searchChanged()"
+              placeholder="Search">
+            <small class="text-muted" *ngIf="filterText">Aradığınız Kelime: {{filterText}}</small>
+          </div>
+        </div>
+
+        <ng-template [ngTemplateOutlet]="popularMovie" [ngTemplateOutletContext]="{moviess:populerMovies}">
+        </ng-template>
+        <ng-template [ngTemplateOutlet]="movieCard" [ngTemplateOutletContext]="{moviess:filteredMovie}"></ng-template>
+      </div>
+
     </div>
   </div>
-
-  <ng-template [ngTemplateOutlet]="popularMovie" [ngTemplateOutletContext]="{moviess:populerMovies}"></ng-template>
-  <ng-template [ngTemplateOutlet]="movieCard" [ngTemplateOutletContext]="{moviess:filteredMovie}"></ng-template>
 </div>
+
+
+
+
+
 
 <ng-template #movieCard let-movieModel="moviess">
   <div class="card mb-3" *ngFor="let item of movieModel">

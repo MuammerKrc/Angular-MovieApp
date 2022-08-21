@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { UserModel } from '../models/user-model';
 import { AuthService } from '../services/auth-service';
 
@@ -11,23 +12,22 @@ import { AuthService } from '../services/auth-service';
 export class NavbarComponent implements OnInit {
   isAuthenticated: boolean = false;
   userModel: UserModel;
-  user: Subject<UserModel>;
-  constructor(private authService: AuthService) {
-    this.user = this.authService.userObser;
-    this.user.subscribe(userResponse => {
-      debugger;
+  constructor(private authService: AuthService,private router:Router) {
+    this.authService.userObser.subscribe(userResponse => {
       if (userResponse) {
-        debugger;
         this.isAuthenticated = true;
         this.userModel = userResponse;
       }
       else {
-        debugger;
         this.isAuthenticated = false;
       }
     });
   }
 
   ngOnInit(): void {
+  }
+  logOut(){
+    this.authService.logout();
+    this.router.navigateByUrl('/auth');
   }
 }

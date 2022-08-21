@@ -1,31 +1,35 @@
-<form *ngIf="!isLoading" [formGroup]="loginForm" class="form-group">
+<div style="  display: flex; justify-content: center;
+align-items: center;">
+  <form *ngIf="!isLoading" [formGroup]="loginForm" class="form-group">
+    <div class="mb-3  col-12 col-sm-6 col-md-5" style="width: 100%;">
+      <div class="alert alert-danger" *ngIf="isGettingError&&errorMsg!=''">
+        {{errorMsg}}
+      </div>
+      <label for="email" class="form-label">Email</label>
+      <input (change)="write()" class="form-control " type="text" name="email" formControlName="email">
+      <div
+        *ngIf="loginForm.get('email').invalid&&loginForm.get('email').errors['required']&&loginForm.get('email').touched"
+        class="alert alert-danger">
+        Bu alan gereklidir.
+      </div>
+      <div
+        *ngIf="loginForm.get('email').invalid&&loginForm.get('email').errors['email']&&loginForm.get('email').touched"
+        class="alert alert-danger">
+        Bu alana email giriniz.
+      </div>
+    </div>
+    <div class="mb-3 col-12 col-sm-6 col-md-5" style="width: 100%;">
+      <label for="Password" class="form-label">Password</label>
+      <input class="form-control " type="password" formControlName="password" name="Password" id="Password">
+    </div>
+    <button [disabled]="loginForm.invalid" (click)="loginUser()"
+      class="btn btn-outline-primary">{{isLoginModel?'Login':'Register'}}</button>
+    <button (click)="toggle()" style="margin-left: 20px;" class="btn btn-secondary">Toggle to
+      {{isLoginModel?'Register':'Login'}}</button>
+  </form>
 
-  <div class="mb-3 col-12 col-sm-6 col-md-5">
-    <div class="alert alert-danger" *ngIf="isGettingError&&errorMsg!=''">
-      {{errorMsg}}
-    </div>
-    <label for="email" class="form-label">Email</label>
-    <input (change)="write()" class="form-control " type="text" name="email" formControlName="email">
-    <div
-      *ngIf="loginForm.get('email').invalid&&loginForm.get('email').errors['required']&&loginForm.get('email').touched"
-      class="alert alert-danger">
-      Bu alan gereklidir.
-    </div>
-    <div *ngIf="loginForm.get('email').invalid&&loginForm.get('email').errors['email']&&loginForm.get('email').touched"
-      class="alert alert-danger">
-      Bu alana email giriniz.
-    </div>
+  <div *ngIf="isLoading" class="spinner-border" role="status">
+    <span class="sr-only"></span>
   </div>
-  <div class="mb-3 col-12 col-sm-6 col-md-5">
-    <label for="Password" class="form-label">Password</label>
-    <input class="form-control " type="password" formControlName="password" name="Password" id="Password">
-  </div>
-  <button [disabled]="loginForm.invalid" (click)="loginUser()"
-    class="btn btn-outline-primary">{{isLoginModel?'Login':'Register'}}</button>
-  <button (click)="toggle()" style="margin-left: 20px;" class="btn btn-secondary">Toggle to
-    {{isLoginModel?'Register':'Login'}}</button>
-</form>
 
-<div *ngIf="isLoading" class="spinner-border" role="status">
-  <span class="sr-only"></span>
 </div>

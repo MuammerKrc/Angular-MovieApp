@@ -19,6 +19,8 @@ import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { AuthComponent } from './auth/auth.component';
 import { AuthService } from './services/auth-service';
 import { ErrorInterceptorInterceptor } from './error-interceptor.interceptor';
+import { AuthInterceptor } from './auth.interceptor';
+import { AuthGuard } from './guards/auth.guard';
 @NgModule({
   declarations: [ //component
     AppComponent,
@@ -41,7 +43,13 @@ import { ErrorInterceptorInterceptor } from './error-interceptor.interceptor';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [AlertifyService, AuthService, { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorInterceptor, multi: true }],//service
+  providers: [
+    AlertifyService,
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorInterceptor, multi: true },
+    AuthGuard
+  ],//service
   bootstrap: [AppComponent]//startet component
 })
 export class AppModule { }
