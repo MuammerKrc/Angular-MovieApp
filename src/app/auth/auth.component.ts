@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
 import { AuthResponse } from '../models/auth-model';
 import { AuthService } from '../services/auth-service';
 
@@ -19,7 +20,7 @@ export class AuthComponent implements OnInit {
     password: new FormControl("", [Validators.required])
   });
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,private router:Router) { }
 
 
   ngOnInit(): void {
@@ -37,14 +38,12 @@ export class AuthComponent implements OnInit {
     }
     authsResponse.subscribe(data => {
       this.isLoading = false;
-      this.isGettingError=false;
-      console.log(data);
+      this.router.navigateByUrl('/movies');
     }, err => {
       debugger;
       this.isLoading = false;
       this.isGettingError=true;
       this.errorMsg=err;
-      console.log(err);
     });
   }
   toggle() {

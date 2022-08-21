@@ -20,10 +20,22 @@
         <a class="nav-link active " routerLink="/movies/reactive-form">Reactive Movie Create</a>
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto" style="margin-right: 20px;">
+    <ul *ngIf="isAuthenticated else unAuthorize" class="navbar-nav ml-auto" style="margin-right: 20px;">
       <li class="nav-item active">
-        <a class="nav-link active " routerLink="/auth">Login</a>
+        <a class="nav-link active" routerLink="#">{{userModel.email}}</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link active" routerLink="/auth">Logout</a>
       </li>
     </ul>
+
   </div>
 </nav>
+
+<ng-template #unAuthorize>
+  <ul class="navbar-nav ml-auto" style="margin-right: 20px;">
+    <li class="nav-item active">
+      <a class="nav-link active" routerLink="/auth">Login</a>
+    </li>
+  </ul>
+</ng-template>

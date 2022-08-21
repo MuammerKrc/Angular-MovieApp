@@ -14,15 +14,18 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-  user = new Subject<UserModel>();
-
+  userObser = new Subject<UserModel>();
 
   signUp(email: string, password: string): Observable<AuthResponse> {
     return this.http.post<AuthResponse>("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" + this.api_key, {
       email: email,
       password: password,
       returnSecureToken: true
-    }).pipe(tap(this.createUserModel));
+    }).pipe(tap(response=>{
+      var expirationDate = new Date(new Date().getTime() + (Number(response.expiresIn) * 1000));
+      var newuser = new UserModel(response.email, expirationDate, response.idToken, response.localId, response.refreshToken);
+      this.userObser.next(newuser);
+    }));
   }
   login(email: string, password: string): Observable<AuthResponse> {
     return this.http.post<AuthResponse>("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + this.api_key, {
@@ -30,13 +33,12 @@ export class AuthService {
       password: password,
       returnSecureToken: true
     }).pipe(
-      tap(this.createUserModel)
+      tap(response=>{
+        var expirationDate = new Date(new Date().getTime() + (Number(response.expiresIn) * 1000));
+        var newuser = new UserModel(response.email, expirationDate, response.idToken, response.localId, response.refreshToken);
+        this.userObser.next(newuser);
+      })
     );
-  }
-  createUserModel(response: AuthResponse) {
-    var expirationDate = new Date(new Date().getTime() + (Number(response.expiresIn) * 1000));
-    var newuser = new UserModel(response.email, expirationDate, response.idToken, response.localId, response.refreshToken);
-    this.user.next(newuser);
   }
 
 }
